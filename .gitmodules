@@ -1,0 +1,3 @@
+[submodule "AzureGameRoomsScaler"]
+	path = AzureGameRoomsScaler
+	url = https://github.com/PoisonousJohn/AzureGameRoomsScaler.git
