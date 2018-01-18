@@ -1,0 +1,55 @@
+{
+    "variables": {
+		"vmImage" : "https://vhdsdisks570.blob.core.windows.net/vhds/templatevm20180117130829.vhd",
+		"vmPorts" : "25565"
+
+    },
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "It's your Azure Functions domain name"
+            }
+        },
+        "location": {
+            "type": "string"
+        },
+        "clientId": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Service Principal Id which can be used by functions to create VMs"
+            }
+        },
+        "clientSecret" : {
+            "type": "securestring",
+            "metadata": {
+                "description": "Service Principal Secret which can be used by functions to create VMs"
+            }
+        }
+    },
+    "resources": [
+		{
+			"apiVersion": "2017-05-10",
+			"name": "linkedTemplate",
+			"type": "Microsoft.Resources/deployments",
+			"properties": {
+			  "mode": "Incremental",
+			  "templateLink": {
+				 "uri":"https://raw.githubusercontent.com/PoisonousJohn/AzureGameRoomsScaler/83e2ce8387682dc72640edc61c0b0d37e07d08cd/deploy.json",
+				 "contentVersion":"1.0.0.0"
+			  },
+			  "parameters": {
+				"ClientId":{"value": "[parameters('clientId')]"},
+				"ClientSecret":{"value": "[parameters('clientSecret')]"},
+				"location":{"value": "[parameters('location')]"},
+				"DefaultVmImage":{"value": "[variables('vmImage')]"},
+				"GameServerPortRange":{"value": "[variables('vmPorts')]"},
+				"name":{"value": "[parameters('name')]"}
+			  }
+			}
+		 }
+
+    ],
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0"
+}
