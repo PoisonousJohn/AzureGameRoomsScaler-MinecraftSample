@@ -1,6 +1,6 @@
 {
     "variables": {
-		"vmImage" : "https://vhdsdisks570.blob.core.windows.net/vhds/templatevm20180117130829.vhd",
+		"vmImage" : "https://vhdsdisks570.blob.core.windows.net/vhds/template3.vhd",
 		"vmPorts" : "25565"
 
     },
